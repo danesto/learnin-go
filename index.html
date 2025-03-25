@@ -1,6 +1,28 @@
 {{ define "content" }}
-<section>
-    <p>This represents simple html blog fully written in go</p>
-    <a href="/blog"> see posts </a>
-</section>
+<div class="grid grid-cols-3 gap-x-4 text-neutral-100">
+    <section>
+        <h1 class="text-xl text-green-500">
+            >projects (dicarded and finished)
+        </h1>
+        <ul class="text-neutral-200 text-base mt-3 space-y-2 pl-2">
+            <li>
+                <a href="#">Go Portfolio (this one)</a>
+            </li>
+            <li>
+                <a href="#">TaggerApp</a>
+            </li>
+        </ul>
+    </section>
+    <section>
+        <h1 class="text-xl text-green-500">>blog</h1>
+        <ul class="text-neutral-200 text-base mt-3 space-y-2 pl-2">
+            <li>
+                <a href="#">Go Portfolio (this one)</a>
+            </li>
+            <li>
+                <a href="#">TaggerApp</a>
+            </li>
+        </ul>
+    </section>
+</div>
 {{ end }}

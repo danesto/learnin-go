@@ -12,18 +12,25 @@ type PageData struct {
 
 func renderTemplate(w http.ResponseWriter, tmpl string, data PageData) {
 	templates, err := template.ParseFiles("layout/layout.html", "layout/header.html", "layout/footer.html", tmpl)
+
 	if err != nil {
 		http.Error(w, "Error loading template", http.StatusInternalServerError)
 		return
 	}
 
 	err = templates.ExecuteTemplate(w, "layout.html", data)
+
 	if err != nil {
+		fmt.Print(err)
 		http.Error(w, "Error rendering template", http.StatusInternalServerError)
 	}
 }
 
 func main() {
+
+	fs := http.FileServer(http.Dir("static"))
+	http.Handle("/static/", http.StripPrefix("/static/", fs))
+
 	port := ":8080"
 
 	fmt.Println("Hello, World!")
@@ -31,6 +38,11 @@ func main() {
 	http.HandleFunc("/about", func(w http.ResponseWriter, r *http.Request) {
 		data := PageData{PageTitle: "About Page"}
 		renderTemplate(w, "about.html", data)
+	})
+
+	http.HandleFunc("/this", func(w http.ResponseWriter, r *http.Request) {
+		data := PageData{PageTitle: "About Page"}
+		renderTemplate(w, "this.html", data)
 	})
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
